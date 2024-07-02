@@ -1,11 +1,10 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
+import expenseContext from '../context/expenses/expenseContext';
 
 function AddExpense() {
-    const [transactions, setTransactions] = useState([
-        { text: 'Cash', amount: 500 },
-        { text: 'Book', amount: -40 },
-        { text: 'Camera', amount: -200 },
-      ]);
+    const context = useContext(expenseContext);
+    const { addExpense } = context;
+    
       const [text, setText] = useState('');
       const [amount, setAmount] = useState('');
     
@@ -16,9 +15,10 @@ function AddExpense() {
           text: text,
           amount: parseFloat(amount)
         };
-        setTransactions([...transactions, newTransaction]);
+        addExpense(newTransaction);
         setText('');
         setAmount('');
+    
       };
     return (
 
